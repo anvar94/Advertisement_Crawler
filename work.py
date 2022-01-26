@@ -33,10 +33,6 @@ def crawler(cfg=None, db_conn=None, l_path=None):
 
 
     option = Options()
-    # option.add_argument('--headless')
-    # option.add_argument('--no-sandbox')
-    # option.add_argument('lang=ko-kr')
-    # option.add_argument('user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36')
     option.add_argument('disable-gpu')
 
 
@@ -79,21 +75,10 @@ def crawler(cfg=None, db_conn=None, l_path=None):
             time.sleep(10)
             break
         last_height = new_height
-        # print("last heightni koriw un ", last_height)
-
 
     # fb_ad = driver.find_elements_by_css_selector('._9ccv._9raa')
     fb_ad = driver.find_elements_by_xpath('//*[contains(@class, \'_99s5\')]')
     # print("fb adni koriw un ", len(fb_ad)) #1487
-
-    # TITLE = []  # 광고 게시일자
-    # ID = []  # 광고 아이디
-    # CONTENT = []  # 광고 글(내용)
-    # HREF = []  # 광고 랜딩페이지
-    # img_src = []  # 이미지 소스
-    # video_src = []  # 동영상 소스
-
-    # name = "gretgerwtges"
 
     for i in range(len(fb_ad)):
 
@@ -159,10 +144,6 @@ def crawler(cfg=None, db_conn=None, l_path=None):
 
         image_name = (str(ad_id_number)+"/"+today_data)
 
-        # print("ALL information", search_key, ad_id_number, brand_name, full_content, ad_url, image_name)
-        # print(type(ad_id_number))
-        # print(ad_id_number)
-
         query_ad_id = {"DATA_ID": ad_id_number}
 
         check_ad_id = mysql.get_data_one(db_conn=db_conn,
@@ -185,9 +166,7 @@ def crawler(cfg=None, db_conn=None, l_path=None):
 
         try:
             ad_img = fb_ad[i].find_element_by_css_selector('._7jys.img').get_attribute('src')  # 이미지 소스 찾기
-            # print("ad_imgni nameni koriw un ", ad_img)
-            # print("imageni otini koriw un ", folder_path + '{}.jpg'.format(ad_id_number))
-            # img_src.append(ad_img)
+
             urlretrieve(ad_img, folder_path + '{}.jpg'.format(ad_id_number))
 
         except:
@@ -202,59 +181,3 @@ def crawler(cfg=None, db_conn=None, l_path=None):
             pass
 
 
-
-
-
-        # print("all image listni koriw un ", img_src)
-    ####################################################
-        #
-        # try:
-        #     urlretrieve(ad_img, folder_path + '{}_{}.jpg'.format(ad_id_number))
-        #     # print("imageni download qiliw un ", image)
-        # except:
-        #     pass
-        # try:
-        #     urlretrieve(ad_img, folder_path + '{}_{}.mp4'.format(ad_id_number))
-        # except:
-        #     pass
-
-
-    # print("image crcni koriw un ", img_src)
-    # for index, link in enumerate(img_src):
-    #     #     print("indexni koriw un ", index)
-    #     # print("linkni koriw un ", link)
-    #     # print("indexni koriw un ", index)
-    #     try:
-    #         urlretrieve(link, folder_path + '{}_{}.jpg'.format(ad_id_number, index + 1))
-    #         # print("imageni download qiliw un ", image)
-    #     except:
-    #         pass
-    #
-    # for index, link in enumerate(video_src):
-    #     try:
-    #         urlretrieve(link, folder_path + '{}_{}.mp4'.format(ad_id_number, index + 1))
-    #     except:
-    #         pass
-    #
-    # driver.quit()
-
-
-
-    # try:
-    #     data = {'ID': ID, 'TITLE': TITLE, 'CONTENT': CONTENT, 'HREF': HREF}
-    # except:
-    #     pass
-    #
-    # data = pd.DataFrame(data)
-    #
-    # try:
-    #     data.to_csv(folder_path + '{}.csv'.format(name), index=False, encoding="utf-8-sig")
-    # except:
-    #     pass
-
-    # print("hrefni nmaligini koriw un ", HREF)
-
-
-    # https://scontent-gmp1-1.xx.fbcdn.net/v/t39.35426-6/s600x600/241352716_4592702427447971_6796914305750585409_n.jpg?_nc_cat=109&ccb=1-5&_nc_sid=cf96c8&_nc_ohc=8C3Nhqmtn7kAX9_kmPM&_nc_ht=scontent-gmp1-1.xx&oh=55078220a62f6f947f0d157143bb19ad&oe=616E6335
-
-# crawler()

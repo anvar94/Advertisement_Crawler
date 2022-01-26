@@ -46,18 +46,4 @@ if __name__ == '__main__':
         cls.main()
         time.sleep(30)
 
-# import multiprocessing as mp
-# from fb_gath_data import main
-# from img.auto_bg_crop.util.config_utils import com_util
-#
-# def facebook_crawler():
-#     cls = main.CLS()
-#     cls.main()
-#
-# if __name__ == '__main__':
-#
-#     cls = CLS()
-#     # cls.main()
-#     while True:
-#         cls.main()
-#         time.sleep(30)
+
